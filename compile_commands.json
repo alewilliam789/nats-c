@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Werror",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-I./include",
+      "-c",
+      "-o",
+      "main.o",
+      "main.c"
+    ],
+    "directory": "/src",
+    "file": "/src/main.c",
+    "output": "/src/main.o"
+  }
+]
