@@ -46,5 +46,5 @@ void test_digest_messages(void) {
 int main(void) {
   test_add_messages();
   test_digest_messages();
-  return 1;
+  return 0;
 }

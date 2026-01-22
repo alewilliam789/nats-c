@@ -28,10 +28,10 @@ int add_message(struct Messages* messages, char* message) {
 
   new_msg = malloc(sizeof(struct Message));
 
+  assert(new_msg != NULL && "The memory for this message was not properly allocated");
+
   new_msg->body = message;
   new_msg->next_msg = NULL;
-
-  assert(new_msg != NULL && "The memory for this message was not properly allocated");
   
   if (messages->length == 0) {
     messages->first_msg =  new_msg;
@@ -44,7 +44,7 @@ int add_message(struct Messages* messages, char* message) {
 
   messages->length += 1;
 
-  return 1;
+  return 0;
 }
 
 struct Message* digest_message(struct Messages* messages){
@@ -79,7 +79,7 @@ int free_messages(struct Messages* message_list) {
     
   }
 
-  return 1;
+  return 0;
 }
 
 
