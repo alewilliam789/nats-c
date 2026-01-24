@@ -1,7 +1,9 @@
 #ifndef MESSAGES_H
 #define MESSAGES_H
 
+#include "arena.h"
 #include <assert.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 enum STORAGE_STATE {
@@ -15,18 +17,18 @@ struct Message {
 };
 
 struct Messages {
-  int length;
+  int32_t length;
   struct Message* first_msg;
   struct Message* last_msg;
 };
 
 
-int add_message(struct Messages* messages, char* message) {
+int add_message(struct Arena* arena, struct Messages* messages, char* message) {
   assert(messages != NULL && "The messages list should not be null");
 
   struct Message* new_msg;
 
-  new_msg = malloc(sizeof(struct Message));
+  new_msg = (struct Message*) allocate_memory(arena, sizeof(struct Message));
 
   assert(new_msg != NULL && "The memory for this message was not properly allocated");
 
@@ -67,20 +69,5 @@ struct Message* digest_message(struct Messages* messages){
   messages->length -= 1;
   return msg;
 }
-
-int free_messages(struct Messages* message_list) {
-  struct Message* current_msg = message_list->first_msg;
-  struct Message* next_msg = NULL;
-
-  while(current_msg != NULL) {
-    next_msg = current_msg->next_msg;
-    free(current_msg);
-    current_msg = next_msg;
-    
-  }
-
-  return 0;
-}
-
 
 #endif // MESSAGES_H
