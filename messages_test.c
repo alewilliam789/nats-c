@@ -1,3 +1,4 @@
+#include "arena.h"
 #include <string.h>
 
 #include <messages.h>
@@ -11,10 +12,10 @@ struct Messages messages= {
 char* test_arr[3] = {"Hello", "all the", "World"};
 
 
-void test_add_messages(void) {
+void test_add_messages(struct Arena* arena) {
 
   for(int i =0; i < 3; i++) {
-    add_message(&messages, test_arr[i]);
+    add_message(arena, &messages, test_arr[i]);
 
     assert(messages.length == i + 1 && "This is the incorrect length for the message list");
   }
@@ -44,6 +45,10 @@ void test_digest_messages(void) {
 
 
 int main(void) {
+  struct Arena* message_arena;
+
+
+
   test_add_messages();
   test_digest_messages();
   return 0;
