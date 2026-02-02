@@ -28,7 +28,7 @@ int add_message(struct Arena* arena, struct Messages* messages, char* message) {
 
   struct Message* new_msg;
 
-  new_msg = (struct Message*) allocate_memory(arena, sizeof(struct Message));
+  new_msg = (struct Message*) allocate_memory(arena, sizeof(struct Message), false);
 
   assert(new_msg != NULL && "The memory for this message was not properly allocated");
 

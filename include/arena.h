@@ -2,6 +2,7 @@
 #define ARENA_H
 
 #include <assert.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,7 +35,7 @@ u_int32_t arena_init(struct Arena *arena, size_t arena_size) {
   return 0;
 }
 
-void* allocate_memory(struct Arena *arena, uint32_t memory_size) {
+void* allocate_memory(struct Arena *arena, uint32_t memory_size,  bool set_null) {
   
   assert(memory_size != 0);
 
@@ -53,6 +54,10 @@ void* allocate_memory(struct Arena *arena, uint32_t memory_size) {
 
     assert(new_block != NULL);
     arena->memory_space = memcpy(new_block, arena->memory_space, arena->len);
+  }
+
+  if (set_null) {
+    void* new_pointer = memset(new_pointer, NULL, memory_size);
   }
 
   arena->len += memory_size;
